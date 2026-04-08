@@ -1,8 +1,9 @@
 import express from 'express'
+import type { Express } from 'express';
 import cors from 'cors'
-import http from 'http'
 
-const app = http.createServer(express());
+const app:Express = express();
 
+app.use(cors())
 
 export default app
