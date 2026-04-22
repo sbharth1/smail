@@ -123,8 +123,14 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-color: #f4efe6;
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+  }
+  ::selection {
+    background: rgb(251 146 60 / 35%);
+    color: white;
   }
 }
