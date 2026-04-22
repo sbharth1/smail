@@ -221,115 +221,30 @@ export default function LandingPage() {
         )}
       />
 
-      <section className="relative mx-auto w-full max-w-7xl px-6 pb-12 pt-6 sm:px-8 lg:px-10 lg:pb-16">
-        <motion.header
-          initial={{ opacity: 0, y: -18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="flex items-center justify-between gap-4"
-        >
-          <div className={cn("flex items-center gap-3 rounded-full border px-3 py-2 backdrop-blur-xl", softPanelClass)}>
-            <div
-              className={cn(
-                "flex size-11 items-center justify-center rounded-full",
-                isDark ? "bg-[#f59e0b] text-[#08111d]" : "bg-[#17120f] text-[#fff8ef]"
-              )}
-            >
-              <Inbox className="size-5" />
-            </div>
-            <div>
-              <p className="text-xs uppercase tracking-[0.32em]">Smail</p>
-              <p className={cn("text-sm", mutedTextClass)}>Public temp inbox, redesigned</p>
-            </div>
-          </div>
-
+      <section className="relative w-full px-6 pb-12 pt-6 sm:px-8 lg:px-10 lg:pb-16">
+        <div className="flex items-center justify-end">
           <button
-            type="button"
             onClick={() => setTheme(isDark ? "light" : "dark")}
             className={cn(
-              "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-colors",
-              softPanelClass
+              "rounded-full border p-2 transition-colors",
+              isDark
+                ? "border-white/12 bg-white/6 text-white hover:bg-white/10"
+                : "border-black/10 bg-black/5 text-[#17120f] hover:bg-black/10"
             )}
+            aria-label="Toggle theme"
           >
-            {isDark ? <SunMedium className="size-4" /> : <MoonStar className="size-4" />}
-            {isDark ? "LIGHT" : "DARK"}
+            {isDark ? (
+              <SunMedium className="size-5" />
+            ) : (
+              <MoonStar className="size-5" />
+            )}
           </button>
-        </motion.header>
+        </div>
 
-        <div className="grid gap-8 pt-10 xl:grid-cols-[1.02fr_0.98fr] xl:items-start">
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="max-w-3xl pt-4"
-          >
-            <motion.h1
-              variants={itemVariants}
-              className="mt-6 max-w-4xl text-5xl font-semibold tracking-tight sm:text-6xl lg:text-7xl lg:leading-[0.94]"
-            >
-              Pick a username.
-              <span className="block">Hit GO.</span>
-              <span className={cn("block", isDark ? "text-[#f59e0b]" : "text-[#b6461d]")}>
-                Burn the inbox later.
-              </span>
-            </motion.h1>
-
-            <motion.p
-              variants={itemVariants}
-              className={cn("mt-6 max-w-2xl text-lg leading-8 sm:text-xl", mutedTextClass)}
-            >
-              The reference site keeps the product flow extremely simple: choose a
-              username, open a temporary mailbox, and remember that the inbox is public
-              and short-lived. This version keeps that same product logic but turns it
-              into a more striking, editorial interface.
-            </motion.p>
-
-            <motion.div variants={itemVariants} className="mt-8 flex flex-wrap gap-3">
-              <div className={cn("rounded-full border px-4 py-2 text-sm", softPanelClass)}>
-                Public inboxes
-              </div>
-              <div className={cn("rounded-full border px-4 py-2 text-sm", softPanelClass)}>
-                7-day cleanup window
-              </div>
-              <div className={cn("rounded-full border px-4 py-2 text-sm", softPanelClass)}>
-                No signup wall
-              </div>
-            </motion.div>
-
-            <motion.div variants={itemVariants} className="mt-10 grid gap-4 md:grid-cols-3">
-              {rules.map((rule) => {
-                const Icon = rule.icon;
-
-                return (
-                  <motion.article
-                    key={rule.title}
-                    whileHover={reduceMotion ? undefined : { y: -6 }}
-                    className={cn(
-                      "rounded-[28px] border p-5 shadow-[0_10px_30px_rgba(15,23,42,0.08)] transition-transform",
-                      panelClass
-                    )}
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <span className={cn("text-xs uppercase tracking-[0.28em]", mutedTextClass)}>
-                        {rule.eyebrow}
-                      </span>
-                      <div className={cn("flex size-11 items-center justify-center rounded-2xl", softPanelClass)}>
-                        <Icon className="size-5" />
-                      </div>
-                    </div>
-                    <h2 className="mt-5 text-2xl font-semibold">{rule.title}</h2>
-                    <p className={cn("mt-3 leading-7", mutedTextClass)}>{rule.description}</p>
-                  </motion.article>
-                );
-              })}
-            </motion.div>
-          </motion.div>
+        <div className="grid gap-8 pt-10 w-full xl:items-start">
 
           <motion.div
-            initial={{ opacity: 0, x: 32 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.65, ease: "easeOut", delay: 0.08 }}
-            className="relative"
+            className="relative w-full"
           >
             <div
               aria-hidden="true"
@@ -340,16 +255,6 @@ export default function LandingPage() {
             />
 
             <motion.div
-              animate={
-                reduceMotion
-                  ? { y: 0, rotate: 0 }
-                  : { y: [0, -8, 0], rotate: [0, -0.8, 0] }
-              }
-              transition={
-                reduceMotion
-                  ? { duration: 0 }
-                  : { duration: 7.5, repeat: Infinity, ease: "easeInOut" }
-              }
               className={cn(
                 "relative overflow-hidden rounded-[34px] border p-5 shadow-[0_36px_90px_rgba(15,23,42,0.16)] backdrop-blur-2xl sm:p-6",
                 panelClass
@@ -469,9 +374,6 @@ export default function LandingPage() {
                 <div className="mt-6 grid gap-4">
                   <motion.div
                     key={launchedInbox}
-                    initial={{ opacity: 0, y: 14 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
                     className={cn("rounded-[28px] border p-5", softPanelClass)}
                   >
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -496,14 +398,6 @@ export default function LandingPage() {
                       {previewMessages.map((message, index) => (
                         <motion.div
                           key={message.sender}
-                          initial={{ opacity: 0, y: 12 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            duration: 0.35,
-                            delay: 0.08 + index * 0.08,
-                            ease: "easeOut",
-                          }}
-                          whileHover={reduceMotion ? undefined : { y: -3 }}
                           className={cn(
                             "rounded-[22px] border p-4 transition-transform",
                             isDark ? "border-white/8 bg-black/15" : "border-black/8 bg-white/75"
@@ -527,35 +421,7 @@ export default function LandingPage() {
                     </div>
                   </motion.div>
 
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <div className={cn("rounded-[24px] border p-4", softPanelClass)}>
-                      <div className="flex items-center gap-3">
-                        <div className={cn("flex size-11 items-center justify-center rounded-2xl", highlightCardClass)}>
-                          <Globe2 className="size-5" />
-                        </div>
-                        <div>
-                          <p className={cn("text-xs uppercase tracking-[0.28em]", mutedTextClass)}>
-                            Public notice
-                          </p>
-                          <p className="mt-1 font-medium">Anyone with the address can read it</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className={cn("rounded-[24px] border p-4", softPanelClass)}>
-                      <div className="flex items-center gap-3">
-                        <div className={cn("flex size-11 items-center justify-center rounded-2xl", highlightCardClass)}>
-                          <Clock3 className="size-5" />
-                        </div>
-                        <div>
-                          <p className={cn("text-xs uppercase tracking-[0.28em]", mutedTextClass)}>
-                            Cleanup rule
-                          </p>
-                          <p className="mt-1 font-medium">Messages should clear after seven days</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                 
                 </div>
               </div>
             </motion.div>
