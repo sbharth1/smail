@@ -135,7 +135,7 @@ function normalizeUsername(value: string) {
 }
 
 export default function LandingPage() {
-  const reduceMotion = useReducedMotion();
+  // const reduceMotion = useReducedMotion();
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [username, setUsername] = useState("signal-room");
   const [selectedDomain, setSelectedDomain] = useState(domains[0]);
